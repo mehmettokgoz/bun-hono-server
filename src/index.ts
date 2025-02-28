@@ -4,20 +4,6 @@ import { Client } from '@upstash/workflow'
 
 const app = new Hono()
 
-function blobToString(blob: Blob): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      resolve(reader.result as string);
-    };
-    reader.onerror = () => {
-      reject(new Error('Failed to read blob as string'));
-    };
-    reader.readAsText(blob);
-  });
-}
-
-
 const BASE_URL = process.env.BASE_URL
 const WORKFLOW_ENDPONT = "workflow"
 
@@ -44,9 +30,8 @@ app.post(`/${WORKFLOW_ENDPONT}`,
 )
 
 app.get(`${WORKFLOW_ENDPONT}`, async (c) => {
-    const body  = await c.req.raw.blob()
-    const text = await blobToString(body);
-    console.log("Body =>",text)
+
+    console.log("Body length =>",c.req.raw.blob.length)
     console.log("Header => ",c.req.raw.headers)
 })
 
