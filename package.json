@@ -5,6 +5,7 @@
     "start": "bun run src/index.ts"
   },
   "dependencies": {
+    "@upstash/workflow": "^0.2.11",
     "hono": "^4.7.2"
   },
   "devDependencies": {
