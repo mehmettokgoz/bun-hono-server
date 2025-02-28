@@ -29,8 +29,9 @@ app.post(`/${WORKFLOW_ENDPONT}`,
 )
 
 app.get(`${WORKFLOW_ENDPONT}`, async (c) => {
-    console.log("Body =>",c.body)
-    console.log("Header => ",c.header)
+  const body  = await c.req.raw.text()
+    console.log("Body =>",body)
+    console.log("Header => ",c.req.raw.headers)
 })
 
 app.post("/trigger", async (c) => {
