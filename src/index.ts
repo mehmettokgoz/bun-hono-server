@@ -19,6 +19,7 @@ app.post(`/${WORKFLOW_ENDPONT}`,
   serve(async (context) => {
     console.log("base_url=>",BASE_URL)
     console.log("context.url => ",context.url)
+    context.url = BASE_URL
     await context.run("initial-step", () => {
       console.log("initial step ran")
     })
@@ -30,7 +31,7 @@ app.post(`/${WORKFLOW_ENDPONT}`,
 )
 
 app.get(`${WORKFLOW_ENDPONT}`, async (c) => {
-  const body  = await c.req.raw.text()
+    const body  = await c.req.raw.json()
     console.log("Body =>",body)
     console.log("Header => ",c.req.raw.headers)
 })
