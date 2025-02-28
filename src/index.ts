@@ -17,6 +17,7 @@ app.get('/', (c) => {
 
 app.post(`/${WORKFLOW_ENDPONT}`,
   serve(async (context) => {
+    console.log("context.url => ",context.url)
     await context.run("initial-step", () => {
       console.log("initial step ran")
     })
@@ -26,6 +27,11 @@ app.post(`/${WORKFLOW_ENDPONT}`,
     })
   })
 )
+
+app.get(`${WORKFLOW_ENDPONT}`, async (c) => {
+    console.log("Body =>",c.body)
+    console.log("Header => ",c.header)
+})
 
 app.post("/trigger", async (c) => {
   const { workflowRunId } = await client.trigger({
