@@ -17,6 +17,7 @@ app.get('/', (c) => {
 
 app.post(`/${WORKFLOW_ENDPONT}`,
   serve(async (context) => {
+
     console.log("base_url=>",BASE_URL)
     console.log("context.url => ",context.url)
     await context.run("initial-step", () => {
@@ -26,6 +27,8 @@ app.post(`/${WORKFLOW_ENDPONT}`,
     await context.run("second-step", () => {
       console.log("second step ran")
     })
+  }, {
+    verbose: true
   })
 )
 
